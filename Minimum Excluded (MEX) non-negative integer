@@ -1,0 +1,47 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class MEXFinder {
+
+    /**
+     * Finds the Minimum Excluded (MEX) non-negative integer from the given array.
+     * The MEX is the smallest non-negative integer not present in the array.
+     *
+     * @param nums The input array of integers.
+     * @return The smallest non-negative integer not present in the array.
+     */
+    public static int findMEX(int[] nums) {
+        // Use a HashSet to efficiently check for the presence of numbers.
+        Set<Integer> presentNumbers = new HashSet<>();
+
+        // Add all non-negative numbers from the array to the HashSet.
+        for (int num : nums) {
+            if (num >= 0) {
+                presentNumbers.add(num);
+            }
+        }
+
+        // Iterate through non-negative integers starting from 0.
+        // The first non-negative integer not found in the set is the MEX.
+        int mex = 0;
+        while (presentNumbers.contains(mex)) {
+            mex++;
+        }
+
+        return mex;
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {1, 0, 2, 4};
+        System.out.println("MEX of {1, 0, 2, 4}: " + findMEX(arr1)); // Expected: 3
+
+        int[] arr2 = {5, 6, 7};
+        System.out.println("MEX of {5, 6, 7}: " + findMEX(arr2)); // Expected: 0
+
+        int[] arr3 = {0, 1, 2, 3};
+        System.out.println("MEX of {0, 1, 2, 3}: " + findMEX(arr3)); // Expected: 4
+
+        int[] arr4 = {-1, -5, 0, 2};
+        System.out.println("MEX of {-1, -5, 0, 2}: " + findMEX(arr4)); // Expected: 1
+    }
+}
