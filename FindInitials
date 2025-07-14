@@ -1,0 +1,33 @@
+public class NameUtils {
+
+    /**
+     * Extracts the capitalized initials from each word in a full name.
+     *
+     * @param fullName The full name as a String.
+     * @return A String containing the capitalized initials.
+     */
+    public static String extractInitials(String fullName) {
+        if (fullName == null || fullName.trim().isEmpty()) {
+            return ""; // Handle null or empty input
+        }
+
+        StringBuilder initials = new StringBuilder();
+        String[] words = fullName.trim().split("\\s+"); // Split by one or more spaces
+
+        for (String word : words) {
+            if (!word.isEmpty()) { // Ensure the word is not empty (e.g., from multiple spaces)
+                initials.append(Character.toUpperCase(word.charAt(0)));
+            }
+        }
+        return initials.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(extractInitials("John Doe")); // Output: JD
+        System.out.println(extractInitials("Mary Jane Smith")); // Output: MJS
+        System.out.println(extractInitials("  peter   pan  ")); // Output: PP
+        System.out.println(extractInitials("singleword")); // Output: S
+        System.out.println(extractInitials("")); // Output:
+        System.out.println(extractInitials(null)); // Output:
+    }
+}
