@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+        int[] arr = new int[num];
+        for (int i = 0; i < num; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        int result = updateMEX(num, arr);
+        System.out.println(result);
+    }
+
+    public static int updateMEX(int num, int[] arr) {
+        int MEX = -1, newFreq = Integer.MAX_VALUE;
+        int[] frequency = new int[101]; // Assuming the maximum value can be 100
+
+        // Count the frequency of each element in the array
+        for (int i = 0; i < num; i++) {
+            frequency[arr[i]]++;
+        }
+
+        // Find the smallest MEX value by iterating from 0
+        for (int mex = 0; mex <= 100; mex++) {
+            if (frequency[mex] == 0) {
+                MEX = mex;
+                break;
+            }
+        }
+
+        if (MEX == 0) {
+            return -1;
+        }
+
+        for (int i = 0; i < MEX; i++) {
+            newFreq = Math.min(newFreq, frequency[i]);
+        }
+
+        return newFreq;
+    }
+}
